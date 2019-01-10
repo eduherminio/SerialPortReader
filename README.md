@@ -1,6 +1,6 @@
 # SerialPortReader
 
-Basic serial port reader for Windows, based on [tiefseeudo's one](github.com/tiefseeudo/Serial-Port-Reader-Windows).
+Basic serial port reader for Windows, based on [tiefseeudo's one](https://github.com/tiefseeudo/Serial-Port-Reader-Windows).
 
 ## Admited args
 
