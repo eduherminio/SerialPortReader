@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 #include <Windows.h>
-#include "main.h"
-
 const std::string defaultPort = "COM4";
 const int default_baudrate = CBR_9600;
 
