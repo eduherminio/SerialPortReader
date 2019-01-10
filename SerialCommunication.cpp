@@ -15,7 +15,7 @@ SerialPort::SerialPort(LPCSTR port_name, DWORD baud_rate) :
 	}
 	else
 	{
-		printf("\n[WARNING] Consider using one of the following standard baud rates: \n");
+		printf("[WARNING] Consider using one of the following standard baud rates: \n");
 		for (auto &elem : STANDARD_BAUD_RATES)
 		{
 			std::cout << elem << std::endl;
@@ -29,11 +29,11 @@ SerialPort::SerialPort(LPCSTR port_name, DWORD baud_rate) :
 		last_error = GetLastError();
 		if (last_error == ERROR_FILE_NOT_FOUND)
 		{
-			std::cout << "\n[ERROR] Unable to open port " << port_name << std::endl;
+			std::cout << "[ERROR] Unable to open port " << port_name << std::endl;
 		}
 		else
 		{
-			std::cout << "\n[ERROR] Error creating port handle" << std::endl;
+			std::cout << "[ERROR] Error creating port handle" << std::endl;
 		}
 		system("pause");
 		exit(EXIT_FAILURE);
@@ -43,7 +43,7 @@ SerialPort::SerialPort(LPCSTR port_name, DWORD baud_rate) :
 
 	if (!(GetCommState(handler, &serialConnection)))
 	{
-		std::cout << "\n[ERROR] Couldn't get settings for specified port" << std::endl;
+		std::cout << "[ERROR] Couldn't get settings for specified port" << std::endl;
 		system("pause");
 		exit(EXIT_FAILURE);
 	}
@@ -56,7 +56,7 @@ SerialPort::SerialPort(LPCSTR port_name, DWORD baud_rate) :
 
 	if (!(SetCommState(handler, &serialConnection)))
 	{
-		std::cout << "\n[ERROR] Couldn't apply settings to specified port" << std::endl;
+		std::cout << "[ERROR] Couldn't apply settings to specified port" << std::endl;
 		system("pause");
 		exit(EXIT_FAILURE);
 	}
@@ -87,9 +87,14 @@ int SerialPort::read(uint8_t* buffer, uint8_t buffer_size)
 		{
 			toRead = buffer_size;
 		}
-		else toRead = status.cbInQue;
-
-		if (ReadFile(handler, buffer, toRead, &bytesRead, NULL)) return bytesRead;
+		else
+		{
+			toRead = status.cbInQue;
+		}
+		if (ReadFile(handler, buffer, toRead, &bytesRead, NULL))
+		{
+			return bytesRead;
+		}
 	}
 
 	return 0;
